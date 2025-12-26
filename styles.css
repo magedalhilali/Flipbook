@@ -1,38 +1,177 @@
-html, body {
+:root{
+  --bg1: #2f5f73;
+  --bg2: #234c5f;
+
+  --text: rgba(255,255,255,0.92);
+  --textDim: rgba(255,255,255,0.70);
+
+  --toolbarBg: rgba(0,0,0,0.18);
+  --toolbarBorder: rgba(255,255,255,0.12);
+
+  --btnBg: rgba(255,255,255,0.12);
+  --btnBgHover: rgba(255,255,255,0.18);
+  --btnBorder: rgba(255,255,255,0.18);
+
+  --frameBg: rgba(255,255,255,0.06);
+  --frameBorder: rgba(255,255,255,0.14);
+
+  --shadow: 0 24px 60px rgba(0,0,0,0.35);
+}
+
+*{ box-sizing: border-box; }
+
+html, body{
   height: 100%;
   margin: 0;
-  background: #f3f3f3;
   overflow: hidden;
-  font-family: Arial, sans-serif;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  color: var(--text);
+
+  /* Nice gradient background */
+  background:
+    radial-gradient(1100px 600px at 20% 10%, rgba(255,255,255,0.12), transparent 55%),
+    radial-gradient(900px 600px at 90% 30%, rgba(255,255,255,0.10), transparent 60%),
+    linear-gradient(135deg, var(--bg1), var(--bg2));
 }
 
-.toolbar {
-  height: 48px;
+/* ---------- Toolbar ---------- */
+.toolbar{
+  height: 56px;
+  padding: 0 14px;
   display: flex;
   align-items: center;
-  gap: 12px;
-  padding: 0 12px;
-  background: white;
-  border-bottom: 1px solid #ddd;
+  gap: 10px;
+
+  background: var(--toolbarBg);
+  border-bottom: 1px solid var(--toolbarBorder);
+  backdrop-filter: blur(10px);
 }
 
-.toolbar button {
-  height: 32px;
+.toolbar .title{
+  font-weight: 650;
+  letter-spacing: 0.2px;
+  font-size: 14px;
+  opacity: 0.95;
+}
+
+.toolbar .spacer{ flex: 1; }
+
+.toolbar #pageInfo{
+  font-size: 13px;
+  color: var(--textDim);
+  min-width: 70px;
+  text-align: center;
+}
+
+.toolbar button{
+  height: 36px;
+  min-width: 44px;
   padding: 0 12px;
+
+  border-radius: 10px;
+  border: 1px solid var(--btnBorder);
+  background: var(--btnBg);
+  color: var(--text);
   cursor: pointer;
+
+  transition: transform 0.06s ease, background 0.15s ease, border-color 0.15s ease;
 }
 
+.toolbar button:hover{
+  background: var(--btnBgHover);
+  border-color: rgba(255,255,255,0.25);
+}
+
+.toolbar button:active{
+  transform: translateY(1px);
+}
+
+.toolbar button:disabled{
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+/* ---------- Stage ---------- */
 #bookWrap{
-  height: calc(100vh - 48px);
+  height: calc(100vh - 56px);
+  padding: clamp(12px, 2.2vw, 24px);
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 20px;
 }
 
-/* This is the key: constrain width so it stays in the middle */
+/* The centered frame (not full width) */
+#bookFrame{
+  width: min(1220px, 92vw);   /* keeps it centered and not edge-to-edge */
+  height: min(86vh, 820px);   /* uses most of the height */
+  border-radius: 18px;
+
+  background: var(--frameBg);
+  border: 1px solid var(--frameBorder);
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(10px);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  position: relative;
+}
+
+/* PageFlip attaches to this */
 #book{
-  width: min(1200px, 92vw);   /* not full width */
-  height: min(86vh, 850px);   /* mostly full height */
+  width: 100%;
+  height: 100%;
 }
 
+/* subtle bottom shadow */
+#bookFrame::after{
+  content:"";
+  position:absolute;
+  left: 6%;
+  right: 6%;
+  bottom: -18px;
+  height: 36px;
+  background: radial-gradient(closest-side, rgba(0,0,0,0.45), transparent 70%);
+  filter: blur(10px);
+  opacity: 0.55;
+  pointer-events: none;
+}
+
+/* ---------- Loading overlay ---------- */
+#loading{
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  color: var(--textDim);
+  font-size: 14px;
+  background: rgba(0,0,0,0.18);
+  backdrop-filter: blur(6px);
+  z-index: 10;
+}
+
+#loading .spinner{
+  width: 18px;
+  height: 18px;
+  border-radius: 999px;
+  border: 2px solid rgba(255,255,255,0.25);
+  border-top-color: rgba(255,255,255,0.85);
+  animation: spin 0.9s linear infinite;
+}
+
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* ---------- Responsive ---------- */
+@media (max-width: 900px){
+  .toolbar{ height: 52px; }
+  #bookWrap{ height: calc(100vh - 52px); }
+
+  #bookFrame{
+    width: 96vw;
+    height: 84vh;
+    border-radius: 16px;
+  }
+}
