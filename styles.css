@@ -22,14 +22,17 @@ html, body {
   cursor: pointer;
 }
 
-#bookWrap {
+#bookWrap{
   height: calc(100vh - 48px);
   display: flex;
   align-items: center;
   justify-content: center;
+  padding: 20px;
 }
 
-#book {
-  /* JS will size the actual book */
+/* This is the key: constrain width so it stays in the middle */
+#book{
+  width: min(1200px, 92vw);   /* not full width */
+  height: min(86vh, 850px);   /* mostly full height */
 }
 
