@@ -26,43 +26,68 @@ const Pages = [
   "Pages/RGCT Company Profile 04-10-2025v2-24.png",
   "Pages/RGCT Company Profile 04-10-2025v2-25.png",
   "Pages/RGCT Company Profile 04-10-2025v2-26.png",
-  
-  // ...
 ];
 
 const bookEl = document.getElementById("book");
 const pageInfo = document.getElementById("pageInfo");
+const loadingEl = document.getElementById("loading");
+
+const btnPrev = document.getElementById("prev");
+const btnNext = document.getElementById("next");
+
+function setDisabledAll(disabled){
+  btnPrev.disabled = disabled;
+  btnNext.disabled = disabled;
+}
+
+function updateUI(){
+  const total = pageFlip.getPageCount();
+  const current = pageFlip.getCurrentPageIndex() + 1;
+
+  pageInfo.textContent = `${current} / ${total}`;
+  btnPrev.disabled = (current <= 1);
+  btnNext.disabled = (current >= total);
+}
 
 // 2) Create flipbook
+// Your images appear to be LANDSCAPE spreads (two-page wide), so this ratio fits better than 550x733.
 const pageFlip = new St.PageFlip(bookEl, {
-  width: 550,          // base page size (JS will scale)
-  height: 733,
-  size: "stretch",     // makes it adapt to container
-  minWidth: 315,
-  maxWidth: 1200,
-  minHeight: 420,
-  maxHeight: 1600,
+  width: 900,
+  height: 600,
+  size: "stretch",
   maxShadowOpacity: 0.35,
   showCover: true,
   mobileScrollSupport: false,
 });
 
 // 3) Load pages as images
-pageFlip.loadFromImages(Pages);
+setDisabledAll(true);
+
+try {
+  pageFlip.loadFromImages(Pages);
+} catch (e) {
+  console.error(e);
+  if (loadingEl) {
+    loadingEl.innerHTML = `<div style="padding:16px;">Failed to load pages. Check console.</div>`;
+  }
+}
 
 // 4) Controls
-document.getElementById("prev").addEventListener("click", () => pageFlip.flipPrev());
-document.getElementById("next").addEventListener("click", () => pageFlip.flipNext());
+btnPrev.addEventListener("click", () => pageFlip.flipPrev());
+btnNext.addEventListener("click", () => pageFlip.flipNext());
 
-// 5) Update page indicator
-pageFlip.on("flip", (e) => {
-  const current = e.data + 1;
-  const total = pageFlip.getPageCount();
-  pageInfo.textContent = `${current} / ${total}`;
-});
-
-// After load, set initial text
+// 5) Events
 pageFlip.on("init", () => {
-  pageInfo.textContent = `1 / ${pageFlip.getPageCount()}`;
+  if (loadingEl) loadingEl.style.display = "none";
+  setDisabledAll(false);
+  updateUI();
 });
 
+pageFlip.on("flip", () => {
+  updateUI();
+});
+
+// 6) Ensure it resizes nicely
+window.addEventListener("resize", () => {
+  try { pageFlip.update(); } catch(e) {}
+});
