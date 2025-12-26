@@ -48,7 +48,7 @@ const pageFlip = new St.PageFlip(bookEl, {
 });
 
 // 3) Load pages as images
-pageFlip.loadFromImages(pages);
+pageFlip.loadFromImages(Pages);
 
 // 4) Controls
 document.getElementById("prev").addEventListener("click", () => pageFlip.flipPrev());
