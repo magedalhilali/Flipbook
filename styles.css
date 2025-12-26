@@ -1,1 +1,35 @@
+html, body {
+  height: 100%;
+  margin: 0;
+  background: #f3f3f3;
+  overflow: hidden;
+  font-family: Arial, sans-serif;
+}
+
+.toolbar {
+  height: 48px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 0 12px;
+  background: white;
+  border-bottom: 1px solid #ddd;
+}
+
+.toolbar button {
+  height: 32px;
+  padding: 0 12px;
+  cursor: pointer;
+}
+
+#bookWrap {
+  height: calc(100vh - 48px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#book {
+  /* JS will size the actual book */
+}
 
