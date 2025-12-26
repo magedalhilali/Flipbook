@@ -1,5 +1,5 @@
 // 1) List your pages here (add as many as you want)
-const pages = [
+const Pages = [
   "Pages/RGCT Company Profile 04-10-2025v2-01.png",
   "Pages/RGCT Company Profile 04-10-2025v2-02.png",
   "Pages/RGCT Company Profile 04-10-2025v2-03.png",
