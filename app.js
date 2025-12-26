@@ -1,8 +1,32 @@
 // 1) List your pages here (add as many as you want)
 const pages = [
-  "pages/page-01.jpg",
-  "pages/page-02.jpg",
-  "pages/page-03.jpg",
+  "pages/RGCT Company Profile 04-10-2025v2-01.png",
+  "pages/RGCT Company Profile 04-10-2025v2-02.png",
+  "pages/RGCT Company Profile 04-10-2025v2-03.png",
+  "pages/RGCT Company Profile 04-10-2025v2-04.png",
+  "pages/RGCT Company Profile 04-10-2025v2-05.png",
+  "pages/RGCT Company Profile 04-10-2025v2-06.png",
+  "pages/RGCT Company Profile 04-10-2025v2-07.png",
+  "pages/RGCT Company Profile 04-10-2025v2-08.png",
+  "pages/RGCT Company Profile 04-10-2025v2-09.png",
+  "pages/RGCT Company Profile 04-10-2025v2-10.png",
+  "pages/RGCT Company Profile 04-10-2025v2-11.png",
+  "pages/RGCT Company Profile 04-10-2025v2-12.png",
+  "pages/RGCT Company Profile 04-10-2025v2-13.png",
+  "pages/RGCT Company Profile 04-10-2025v2-14.png",
+  "pages/RGCT Company Profile 04-10-2025v2-15.png",
+  "pages/RGCT Company Profile 04-10-2025v2-16.png",
+  "pages/RGCT Company Profile 04-10-2025v2-17.png",
+  "pages/RGCT Company Profile 04-10-2025v2-18.png",
+  "pages/RGCT Company Profile 04-10-2025v2-19.png",
+  "pages/RGCT Company Profile 04-10-2025v2-20.png",
+  "pages/RGCT Company Profile 04-10-2025v2-21.png",
+  "pages/RGCT Company Profile 04-10-2025v2-22.png",
+  "pages/RGCT Company Profile 04-10-2025v2-23.png",
+  "pages/RGCT Company Profile 04-10-2025v2-24.png",
+  "pages/RGCT Company Profile 04-10-2025v2-25.png",
+  "pages/RGCT Company Profile 04-10-2025v2-26.png",
+  
   // ...
 ];
 
